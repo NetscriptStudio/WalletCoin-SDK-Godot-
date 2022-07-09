@@ -1,9 +1,11 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Themes/Anton-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Themes/LineEditTheme.tres" type="Theme" id=2]
 [ext_resource path="res://Themes/CancelButtonTheme.tres" type="Theme" id=3]
 [ext_resource path="res://Themes/SubmitTheme.tres" type="Theme" id=4]
+[ext_resource path="res://Api/Payments.gd" type="Script" id=5]
+[ext_resource path="res://Api/WalletCoinRestApi.gd" type="Script" id=6]
 
 [sub_resource type="Theme" id=1]
 
@@ -37,6 +39,7 @@ Label/styles/normal = null
 [node name="Payments" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -50,76 +53,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ConnectWallet" type="Panel" parent="Background"]
-visible = false
-margin_left = 326.0
-margin_top = 82.0
-margin_right = 760.0
-margin_bottom = 506.0
-theme = SubResource( 3 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Title" type="Label" parent="Background/ConnectWallet"]
-modulate = Color( 0.564706, 0.564706, 0.564706, 1 )
-margin_top = 35.0
-margin_right = 434.0
-margin_bottom = 92.0
-theme = SubResource( 5 )
-text = "Connect Wallet"
-align = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="AccessToken" type="LineEdit" parent="Background/ConnectWallet"]
-margin_left = 52.3484
-margin_top = 142.0
-margin_right = 721.348
-margin_bottom = 232.0
-rect_scale = Vector2( 0.5, 0.5 )
-theme = ExtResource( 2 )
-placeholder_text = "Your Access Token"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Notification" type="Label" parent="Background/ConnectWallet"]
-modulate = Color( 0.254902, 0.254902, 0.254902, 1 )
-margin_top = 217.968
-margin_right = 868.0
-margin_bottom = 274.968
-rect_scale = Vector2( 0.5, 0.5 )
-theme = SubResource( 5 )
-align = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ConnectWallet" type="Button" parent="Background/ConnectWallet"]
-margin_left = 52.0
-margin_top = 275.0
-margin_right = 530.0
-margin_bottom = 344.0
-rect_scale = Vector2( 0.7, 0.7 )
-theme = ExtResource( 4 )
-text = "Connect"
-
-[node name="CancelConnection" type="Button" parent="Background/ConnectWallet"]
-margin_left = 52.3484
-margin_top = 334.464
-margin_right = 530.348
-margin_bottom = 403.464
-rect_scale = Vector2( 0.7, 0.7 )
-theme = ExtResource( 3 )
-text = "Cancel"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="Payment" type="Panel" parent="Background"]
-visible = false
 margin_left = 326.0
 margin_top = 82.0
 margin_right = 760.0
@@ -131,21 +65,21 @@ __meta__ = {
 
 [node name="Title" type="Label" parent="Background/Payment"]
 modulate = Color( 0.564706, 0.564706, 0.564706, 1 )
-margin_top = 35.0
+margin_top = 21.565
 margin_right = 434.0
-margin_bottom = 92.0
+margin_bottom = 78.565
 theme = SubResource( 5 )
-text = "Payment"
+text = "Pay In WalletCoin"
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Amount" type="LineEdit" parent="Background/Payment"]
-margin_left = 206.0
-margin_top = 142.0
-margin_right = 568.0
-margin_bottom = 232.0
+margin_left = 205.652
+margin_top = 111.335
+margin_right = 567.652
+margin_bottom = 201.335
 rect_scale = Vector2( 0.5, 0.5 )
 theme = ExtResource( 2 )
 text = "0.000566779"
@@ -162,11 +96,23 @@ margin_right = -11.1857
 margin_bottom = 77.9336
 text = "Pay WLLC Amount:"
 
+[node name="AccessToken" type="LineEdit" parent="Background/Payment"]
+margin_left = 52.0
+margin_top = 176.234
+margin_right = 721.0
+margin_bottom = 266.234
+rect_scale = Vector2( 0.5, 0.5 )
+theme = ExtResource( 2 )
+placeholder_text = "Your Access Token"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Notification" type="Label" parent="Background/Payment"]
 modulate = Color( 0.254902, 0.254902, 0.254902, 1 )
-margin_top = 217.968
+margin_top = 243.424
 margin_right = 868.0
-margin_bottom = 274.968
+margin_bottom = 300.424
 rect_scale = Vector2( 0.5, 0.5 )
 theme = SubResource( 5 )
 align = 1
@@ -176,21 +122,30 @@ __meta__ = {
 
 [node name="PayNow" type="Button" parent="Background/Payment"]
 margin_left = 52.0
-margin_top = 275.0
+margin_top = 298.749
 margin_right = 530.0
-margin_bottom = 344.0
+margin_bottom = 354.749
 rect_scale = Vector2( 0.7, 0.7 )
 theme = ExtResource( 4 )
 text = "Pay Now"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="CancelPayment" type="Button" parent="Background/Payment"]
-margin_left = 52.3484
-margin_top = 334.464
-margin_right = 530.348
-margin_bottom = 403.464
+margin_left = 52.0
+margin_top = 345.418
+margin_right = 530.0
+margin_bottom = 401.418
 rect_scale = Vector2( 0.7, 0.7 )
 theme = ExtResource( 3 )
 text = "Cancel"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="WalletCoinAPI" type="Node" parent="."]
+script = ExtResource( 6 )
+Transaction_NotificationLabel = "Background/Payment/Notification"
+[connection signal="pressed" from="Background/Payment/PayNow" to="." method="_on_PayNow_pressed"]
+[connection signal="pressed" from="Background/Payment/CancelPayment" to="." method="_on_CancelPayment_pressed"]

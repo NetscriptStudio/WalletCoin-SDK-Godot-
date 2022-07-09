@@ -1,0 +1,295 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://Themes/Anton-Regular.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Api/IntegrateGameToStockMarket.gd" type="Script" id=2]
+[ext_resource path="res://Themes/CancelButtonTheme.tres" type="Theme" id=3]
+[ext_resource path="res://Themes/SubmitTheme.tres" type="Theme" id=4]
+[ext_resource path="res://Themes/LineEditTheme.tres" type="Theme" id=5]
+[ext_resource path="res://Api/WalletCoinRestApi.gd" type="Script" id=6]
+
+[sub_resource type="Theme" id=1]
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.690196, 0.792157, 0.803922, 0.686275 )
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
+[sub_resource type="Theme" id=3]
+Panel/styles/panel = SubResource( 2 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 38
+use_filter = true
+font_data = ExtResource( 1 )
+
+[sub_resource type="Theme" id=5]
+default_font = SubResource( 4 )
+Label/colors/font_color = Color( 1, 1, 1, 1 )
+Label/colors/font_color_shadow = Color( 0, 0, 0, 0 )
+Label/colors/font_outline_modulate = Color( 1, 1, 1, 1 )
+Label/constants/line_spacing = 3
+Label/constants/shadow_as_outline = 0
+Label/constants/shadow_offset_x = 1
+Label/constants/shadow_offset_y = 1
+Label/fonts/font = null
+Label/styles/normal = null
+
+[node name="IntegrateGameToStockMarket" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="ColorRect" parent="."]
+margin_right = 1024.0
+margin_bottom = 600.0
+theme = SubResource( 1 )
+color = Color( 0.764706, 0.87451, 0.87451, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FirstPage" type="Control" parent="Background"]
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Form" type="Panel" parent="Background/FirstPage"]
+margin_left = 271.0
+margin_right = 754.0
+margin_bottom = 600.0
+theme = SubResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="Background/FirstPage/Form"]
+modulate = Color( 0.564706, 0.564706, 0.564706, 1 )
+margin_top = 29.0
+margin_right = 604.0
+margin_bottom = 86.0
+rect_scale = Vector2( 0.8, 0.8 )
+theme = SubResource( 5 )
+text = "Integrate Game to WalletCoin"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GameName" type="LineEdit" parent="Background/FirstPage/Form"]
+margin_left = 79.229
+margin_top = 113.0
+margin_right = 729.229
+margin_bottom = 200.0
+rect_scale = Vector2( 0.5, 0.5 )
+theme = ExtResource( 5 )
+placeholder_text = "Game Name"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OwnersUsername" type="LineEdit" parent="Background/FirstPage/Form"]
+margin_left = 79.229
+margin_top = 180.395
+margin_right = 729.229
+margin_bottom = 266.395
+rect_scale = Vector2( 0.5, 0.5 )
+theme = ExtResource( 5 )
+placeholder_text = "Owner ( WalletCoin account )"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Description" type="RichTextLabel" parent="Background/FirstPage/Form"]
+modulate = Color( 0.356863, 0.356863, 0.356863, 1 )
+margin_left = 35.5338
+margin_top = 231.293
+margin_right = 1063.53
+margin_bottom = 366.293
+rect_scale = Vector2( 0.4, 0.4 )
+theme = SubResource( 5 )
+text = "Please warning when you typing owner's username, owner should
+be a WalletCoin user which will owns the full control of the game."
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GameDescription" type="TextEdit" parent="Background/FirstPage/Form"]
+modulate = Color( 0.52549, 0.52549, 0.52549, 1 )
+margin_left = 79.229
+margin_top = 295.45
+margin_right = 729.229
+margin_bottom = 463.45
+rect_scale = Vector2( 0.5, 0.5 )
+theme = ExtResource( 5 )
+text = "Game's Description"
+
+[node name="StocksAmount" type="LineEdit" parent="Background/FirstPage/Form"]
+margin_left = 79.229
+margin_top = 400.077
+margin_right = 729.229
+margin_bottom = 486.077
+rect_scale = Vector2( 0.5, 0.5 )
+theme = ExtResource( 5 )
+placeholder_text = "Stocks Amount ( e.g. 1000000 )"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Notification" type="Label" parent="Background/FirstPage/Form"]
+modulate = Color( 0.254902, 0.254902, 0.254902, 1 )
+margin_top = 463.99
+margin_right = 966.0
+margin_bottom = 520.99
+rect_scale = Vector2( 0.5, 0.5 )
+theme = SubResource( 5 )
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Submit" type="Button" parent="Background/FirstPage/Form"]
+margin_left = 79.0
+margin_top = 503.0
+margin_right = 729.0
+margin_bottom = 572.0
+rect_scale = Vector2( 0.5, 0.5 )
+theme = ExtResource( 4 )
+text = "Connect Now"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cancel" type="Button" parent="Background/FirstPage/Form"]
+margin_left = 79.0
+margin_top = 547.0
+margin_right = 729.0
+margin_bottom = 616.0
+rect_scale = Vector2( 0.5, 0.5 )
+theme = ExtResource( 3 )
+text = "Cancel"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SecondPage" type="Control" parent="Background"]
+visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="Background/SecondPage"]
+modulate = Color( 0.564706, 0.564706, 0.564706, 1 )
+margin_left = 350.229
+margin_top = 92.4388
+margin_right = 1031.23
+margin_bottom = 149.439
+rect_scale = Vector2( 0.8, 0.8 )
+theme = SubResource( 5 )
+text = "Integrate your game to StockMarket"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GameName" type="Label" parent="Background/SecondPage"]
+modulate = Color( 0.470588, 0.470588, 0.470588, 1 )
+margin_left = 17.9336
+margin_top = 155.934
+margin_right = 498.934
+margin_bottom = 212.934
+rect_scale = Vector2( 0.6, 0.6 )
+theme = SubResource( 5 )
+text = "Game Name:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StocksAmount" type="Label" parent="Background/SecondPage"]
+modulate = Color( 0.470588, 0.470588, 0.470588, 1 )
+margin_left = 17.9336
+margin_top = 206.903
+margin_right = 498.934
+margin_bottom = 263.903
+rect_scale = Vector2( 0.6, 0.6 )
+theme = SubResource( 5 )
+text = "Stocks Amount:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GameDescription" type="RichTextLabel" parent="Background/SecondPage"]
+modulate = Color( 0.470588, 0.470588, 0.470588, 1 )
+margin_left = 17.9336
+margin_top = 283.016
+margin_right = 547.934
+margin_bottom = 652.016
+rect_scale = Vector2( 0.4, 0.4 )
+theme = SubResource( 5 )
+text = "Description:
+A description for your game!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Description" type="RichTextLabel" parent="Background/SecondPage"]
+modulate = Color( 0.356863, 0.356863, 0.356863, 1 )
+margin_left = 405.607
+margin_top = 172.65
+margin_right = 1495.61
+margin_bottom = 479.65
+rect_scale = Vector2( 0.4, 0.4 )
+theme = SubResource( 5 )
+text = "Are you sure you want to integrate your game to WalletCoin ? Warning: The game should belongs to you or to have a licence from the legit owner in order to integrate it in WalletCoin. If this game doesnt belongs to you, the owner has got the right to claim the assets of the game and you will get banned from WalletCoin."
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Notification" type="Label" parent="Background/SecondPage"]
+modulate = Color( 0.254902, 0.254902, 0.254902, 1 )
+margin_left = 393.902
+margin_top = 328.893
+margin_right = 1347.9
+margin_bottom = 385.893
+rect_scale = Vector2( 0.5, 0.5 )
+theme = SubResource( 5 )
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ConnectGame" type="Button" parent="Background/SecondPage"]
+margin_left = 420.938
+margin_top = 385.22
+margin_right = 1009.94
+margin_bottom = 454.22
+rect_scale = Vector2( 0.7, 0.7 )
+theme = ExtResource( 4 )
+text = "Connect Now"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CancelConnection" type="Button" parent="Background/SecondPage"]
+margin_left = 420.938
+margin_top = 454.911
+margin_right = 1009.94
+margin_bottom = 523.911
+rect_scale = Vector2( 0.7, 0.7 )
+theme = ExtResource( 3 )
+text = "Cancel"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="WalletCoinAPI" type="Node" parent="."]
+script = ExtResource( 6 )
+ListGame_NotificationLabel = "Background/FirstPage/Form/Notification"
+[connection signal="pressed" from="Background/FirstPage/Form/Submit" to="." method="_on_Submit_pressed"]
+[connection signal="pressed" from="Background/FirstPage/Form/Cancel" to="." method="_on_Cancel_pressed"]
+[connection signal="pressed" from="Background/SecondPage/ConnectGame" to="." method="_on_ConnectGame_pressed"]
+[connection signal="pressed" from="Background/SecondPage/CancelConnection" to="." method="_on_CancelConnection_pressed"]
